@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "b6d7e383-6727-433e-b1bd-43afd370f4cd",
+		"name": "Hunter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List all your leads",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData =  pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check Status code\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check geral schema\", function(){\r",
+							"    pm.expect(jsonData).to.be.an(\"Object\");\r",
+							"   \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check schema\", function(){\r",
+							"   pm.expect(jsonData.data).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads).to.be.an(\"Array\");\r",
+							"   pm.expect(jsonData.data.leads[0]).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads[0].id).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.leads[0].email).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.leads[0].first_name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.leads[0].last_name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.leads[0].verification).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads[0].leads_list).to.be.a(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads[0].leads_list.id).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.leads[0].leads_list.name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.leads[0].leads_list.leads_count).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.leads[0].created_at).to.be.a(\"string\");\r",
+							"\r",
+							"   pm.expect(jsonData.meta).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.meta.count).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.meta.total).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.meta.params).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.meta.params.limit).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.meta.params.offset).to.be.a(\"number\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify if exist\", function(){\r",
+							"    pm.expect(jsonData.data.leads[0].website).to.exist;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Verify values\", function(){\r",
+							"   pm.expect(jsonData.data.leads[0].id).to.eql(95129362);\r",
+							"   pm.expect(jsonData.data.leads[0].email).to.eql(\"johan.hammes44@yahoo.com\");\r",
+							"   pm.expect(jsonData.data.leads[0].first_name).to.eql(\"Taya\");\r",
+							"   pm.expect(jsonData.data.leads[0].last_name).to.eql(\"Wuckert\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/leads",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"leads"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a lead",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData =  pm.response.json();\r",
+							"\r",
+							"pm.test(\"Check Status code\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check geral schema\", function(){\r",
+							"    pm.expect(jsonData).to.be.an(\"Object\");\r",
+							"   \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check schema\", function(){\r",
+							"   pm.expect(jsonData.data).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.data.id).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.email).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.first_name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.last_name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.verification).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads_list).to.be.a(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads_list.id).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.leads_list.name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.leads_list.leads_count).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.created_at).to.be.a(\"string\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify values\", function(){\r",
+							"   pm.expect(jsonData.data.id).to.eql(95129360);\r",
+							"   pm.expect(jsonData.data.email).to.eql(\"charles92@hotmail.com\");\r",
+							"   pm.expect(jsonData.data.first_name).to.eql(\"Della\");\r",
+							"   pm.expect(jsonData.data.last_name).to.eql(\"Lakin\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const url = \"https://api.hunter.io/v2/leads?api_key=288e24ed23b268e197226cdc07ccf938f61d6283\"\r",
+							"\r",
+							"pm.sendRequest(url,(error, response)=>{\r",
+							"    if(error){\r",
+							"        console.log(\"Ocorreu um erro inesperado\")\r",
+							"    }\r",
+							"    else{\r",
+							"        var id = response.json().data.leads[1].id;\r",
+							"        pm.collectionVariables.set(\"ID\", id);\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/leads/{{ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"leads",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a lead",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonData =  pm.response.json();\r",
+							"\r",
+							"var email = pm.collectionVariables.get(\"EMAIL\");\r",
+							"var firstName = pm.collectionVariables.get(\"FIRST_NAME\");\r",
+							"var lastName = pm.collectionVariables.get(\"LAST_NAME\");\r",
+							"\r",
+							"pm.test(\"Check Status code\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check geral schema\", function(){\r",
+							"    pm.expect(jsonData).to.be.an(\"Object\");\r",
+							"   \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check schema\", function(){\r",
+							"   pm.expect(jsonData.data).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.data.id).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.email).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.first_name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.last_name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.position).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.company).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.company_industry).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.confidence_score).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.website).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.company_size).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.verification).to.be.an(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads_list).to.be.a(\"Object\");\r",
+							"   pm.expect(jsonData.data.leads_list.id).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.leads_list.name).to.be.a(\"string\");\r",
+							"   pm.expect(jsonData.data.leads_list.leads_count).to.be.a(\"number\");\r",
+							"   pm.expect(jsonData.data.created_at).to.be.a(\"string\");\r",
+							"\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check values\", function(){\r",
+							"   pm.expect(jsonData.data.email).to.eql(email.toLowerCase());\r",
+							"   pm.expect(jsonData.data.first_name).to.eql(firstName);\r",
+							"   pm.expect(jsonData.data.last_name).to.eql(lastName);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var email = pm.variables.replaceIn(\"{{$randomEmail}}\");\r",
+							"var firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");\r",
+							"var lastName = pm.variables.replaceIn(\"{{$randomLastName}}\");\r",
+							"\r",
+							"pm.collectionVariables.set(\"EMAIL\",email);\r",
+							"pm.collectionVariables.set(\"FIRST_NAME\",firstName);\r",
+							"pm.collectionVariables.set(\"LAST_NAME\",lastName);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"first_name\": \"{{FIRST_NAME}}\",\r\n  \"last_name\": \"{{LAST_NAME}}\",\r\n  \"position\": \"Cofounder\",\r\n  \"company\": \"Reddit\",\r\n  \"company_industry\": \"Internet and Telecom\",\r\n  \"company_size\": \"201-500 employees\",\r\n  \"confidence_score\": 97,\r\n  \"website\": \"reddit.com\",\r\n  \"custom_attributes\": {\r\n    \"customer_id\": \"cus-1234abcd\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/leads",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"leads"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a lead",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const url = \"https://api.hunter.io/v2/leads?api_key=288e24ed23b268e197226cdc07ccf938f61d6283\";\r",
+							"\r",
+							"var randonFirstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");\r",
+							"var randonLastName = pm.variables.replaceIn(\"{{$randomLastName}}\");\r",
+							"var randonEmail = pm.variables.replaceIn(\"{{$randomEmail}}\");\r",
+							"\r",
+							"const postRequest = {\r",
+							"    url: url,\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode:'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            email:randonEmail,\r",
+							"            first_name: randonFirstName,\r",
+							"            last_name: randonLastName\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.sendRequest(postRequest,(error,response)=>{\r",
+							"    if(error){\r",
+							"        console.log(error);\r",
+							"    }else{\r",
+							"        let lead = response.json().data;\r",
+							"        if(lead){\r",
+							"            pm.collectionVariables.set('ID',lead.id) \r",
+							"        }\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function(){\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/leads/{{ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"leads",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a lead",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const url = \"https://api.hunter.io/v2/leads?api_key=288e24ed23b268e197226cdc07ccf938f61d6283\";\r",
+							"\r",
+							"var randomFirstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");\r",
+							"var randomLastName = pm.variables.replaceIn(\"{{$randomLastName}}\");\r",
+							"var randomEmail = pm.variables.replaceIn(\"{{$randomEmail}}\");\r",
+							"\r",
+							"const postRequest = {\r",
+							"    url: url,\r",
+							"    method: 'POST',\r",
+							"    header: {\r",
+							"        'Content-Type': 'application/json'\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode:'raw',\r",
+							"        raw: JSON.stringify({\r",
+							"            email:randomEmail,\r",
+							"            first_name: randomFirstName,\r",
+							"            last_name: randomLastName\r",
+							"        })\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.sendRequest(postRequest,(error,response)=>{\r",
+							"    if(error){\r",
+							"        console.log(error);\r",
+							"    }else{\r",
+							"        let lead = response.json().data;\r",
+							"        if(lead){\r",
+							"            pm.collectionVariables.set('ID',lead.id) \r",
+							"        }\r",
+							"    }\r",
+							"    });"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check Status code\", function(){\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/leads/{{ID}}",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"leads",
+						"{{ID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "api_key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "288e24ed23b268e197226cdc07ccf938f61d6283",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://api.hunter.io/v2",
+			"type": "string"
+		},
+		{
+			"key": "ID",
+			"value": "0",
+			"type": "string"
+		},
+		{
+			"key": "EMAIL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "FIRST_NAME",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "LAST_NAME",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
